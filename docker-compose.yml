@@ -11,10 +11,9 @@ services:
     build: 
       context: ./scraper
       dockerfile: Dockerfile
-    command: tail -F anything
     ports:
       - "9000:9000"
     depends_on: 
       - tippmixoddsinfo_mysql
     volumes: 
-      - "./scraper/src:/home/scraper"
+      - "./scraper/src:/home/scraper/src"

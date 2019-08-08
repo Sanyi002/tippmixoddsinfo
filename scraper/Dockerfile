@@ -17,4 +17,15 @@ RUN echo "**** install Python ****" && \
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
     pip3 install peewee PyMySQL
 
-COPY ./src /home/scraper
+COPY ./cron /home/scraper/cron
+COPY ./src /home/scraper/src
+
+RUN touch crontab.tmp /tmp/scraper.log \
+    && chmod 744 /tmp/scraper.log \
+    && chmod 777 /home/scraper/cron/scraper-cron.sh \
+    && echo "* * * * * /usr/bin/flock -n /tmp/scraper.log -c /home/scraper/cron/scraper-cron.sh >> /tmp/scraper.log 2>&1" >> crontab.tmp \
+    && crontab crontab.tmp \
+    && rm -rf crontab.tmp
+
+CMD [ "/usr/sbin/crond", "-f", "-d", "8"]
+
