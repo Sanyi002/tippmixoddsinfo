@@ -8,6 +8,8 @@ services:
       - .env 
   tippmixoddsinfo_scraper:
     image: sanyi002/tippmixoddsinfo_scraper:snapshot1.0.0
+    environment: 
+      - TZ=Europe/Budapest
     build: 
       context: ./scraper
       dockerfile: Dockerfile
@@ -17,3 +19,13 @@ services:
       - tippmixoddsinfo_mysql
     volumes: 
       - "./scraper/src:/home/scraper/src"
+  tippmixoddsinfo_web:
+    image: sanyi002/tippmixoddsinfo_web:snapshot1.0.0
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - "./web/api/dist:/var/www/html"
+      - "./web/api/vendor:/var/www/html/src/vendor"

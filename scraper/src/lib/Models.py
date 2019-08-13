@@ -3,6 +3,7 @@ import peewee
 from .DatabaseObj import DatabaseObj
 
 dbObj = DatabaseObj()
+# TODO: env file
 db = dbObj.connect('tippmix_test', 'tippmixoddsinfo_mysql', 'sanyi', '4l3x4nd3r', 3306)
 db.execute_sql("ALTER DATABASE tippmix_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;")
 

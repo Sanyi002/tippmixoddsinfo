@@ -1,4 +1,7 @@
 .env
 .DS_Store
 .vscode
+._*
+*vendor
 /scraper/src/lib/__pycache__
+/web/api/env.example.php
