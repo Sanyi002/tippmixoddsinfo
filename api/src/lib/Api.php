@@ -6,8 +6,13 @@ class Api {
     private $database;
     private $db;
 
-    public function __construct() {
-        $this->database = new Database('tippmixoddsinfo_mysql', 'tippmix_test', 'sanyi', '4l3x4nd3r');
+    public function __construct() { 
+        $this->database = new Database(
+            getenv('DB_HOST'),
+            getenv('DB_NAME'),
+            getenv('DB_USER'),
+            getenv('DB_PASSWORD')
+        );
         $this->db = $this->database->connect();
     }
 

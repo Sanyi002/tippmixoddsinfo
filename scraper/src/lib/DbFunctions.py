@@ -35,6 +35,7 @@ class DbFunctions:
                 Model.create(
                     eventID = event['eventID'],
                     eventName = event['eventName'],
+                    marketNumber = event['marketNumber'],
                     sportID = event['sportID'],
                     leagueName = event['leagueName'],
                     countryName = event['countryName'],

@@ -1,2 +1,2 @@
 # TippmixoddsInfo
-Repository form my hobby project. 
+Repository for my hobby project. 

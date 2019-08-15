@@ -5,6 +5,8 @@
 
 FROM alpine:latest
 
+ENV TZ=Europe/Budapest
+
 # Install Python3, pip and PyMySQL
 RUN apk add tzdata && \
     echo "**** install Python ****" && \

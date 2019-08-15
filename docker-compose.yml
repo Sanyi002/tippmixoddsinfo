@@ -20,12 +20,12 @@ services:
     volumes: 
       - "./scraper/src:/home/scraper/src"
   tippmixoddsinfo_web:
-    image: sanyi002/tippmixoddsinfo_web:snapshot1.0.0
+    image: sanyi002/tippmixoddsinfo_api:beta1.0
     build:
-      context: ./web
+      context: ./api
       dockerfile: Dockerfile
     ports:
       - "8080:80"
     volumes:
-      - "./web/api/dist:/var/www/html"
-      - "./web/api/vendor:/var/www/html/src/vendor"
+      - "./api/src:/var/www/html"
+      - "./api/vendor:/var/www/html/vendor"

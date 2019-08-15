@@ -27,6 +27,7 @@ class ApiProcess:
                     filteredEvent = {
                         "eventID" : event['eventId'],
                         "eventName" : event['eventName'],
+                        "marketNumber": event['markets'][0]['marketRealNo'],
                         "sportID" : event['sportId'],
                         "leagueName" : event['competitionName'],
                         "countryName": event['competitionGroupName'],

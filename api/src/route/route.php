@@ -2,7 +2,7 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-require dirname($_SERVER['DOCUMENT_ROOT']) . '/html/src/lib/Api.php';
+require dirname($_SERVER['DOCUMENT_ROOT']) . '/html/lib/Api.php';
 
 $api = new Api();
 
