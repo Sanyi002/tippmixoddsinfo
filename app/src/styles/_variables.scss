@@ -1,3 +1,25 @@
+/* breakpoints */
+$screen-lg-min: 1200px;
+$screen-lg-max: $screen-lg-min - 1;
+/* /breakpoints */
+
+/* font family */
+$fontFamilyBase: 'Asap', sans-serif;
+/* /font family */
+
 /* colors */
 $globalBackground: #17223B;
+$globalFontColor: #fff;
+$globalColor: #76a21e;
+$linkColor: $globalColor;
+$linkHoverColor: $globalColor;
 /* /colors */
+
+/* layout variables */
+$navbarHeight: 80px;
+/* /layout variables */
+
+/* global variables */
+$globalBorderRadius: 5px;
+$transitionBase: all 0.3s ease-in-out;
+/* /global variables */
