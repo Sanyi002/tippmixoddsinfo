@@ -5,3 +5,5 @@
 *vendor
 /scraper/src/lib/__pycache__
 /web/api/env.example.php
+api/.gitignore
+api/README.md
