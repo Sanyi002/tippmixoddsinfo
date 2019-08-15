@@ -7,3 +7,4 @@
 /web/api/env.example.php
 api/.gitignore
 api/README.md
+app/node_modules
