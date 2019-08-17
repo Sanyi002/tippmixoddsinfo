@@ -9,11 +9,14 @@ body {
     background: $globalBackground;
     color: $globalFontColor;
 
+    padding-bottom: 350px;
+
     @media screen and (min-width: $screen-lg-min) {
         font-size: 1.6rem;
     }
 }
 
+/* links */
 a,
 a:visited {
     color: $linkColor;
@@ -27,3 +30,57 @@ a:focus {
     text-decoration: none;
     color: $linkHoverColor;
 }
+/* /links */
+
+/* buttons */
+.btn {
+    border-radius: $globalBorderRadius;
+    padding: 8px 25px;
+    border-width: 2px;
+    border-style: solid;
+
+    @media screen and (min-width: $screen-lg-min) {
+        font-size: 1.6rem;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+.btn-primary {
+    background: $globalColor;
+    border-color: $globalColor;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: lighten($globalColor, 4%);
+        border-color: lighten($globalColor, 4%);
+    }
+}
+
+.btn-secondary {
+    background-color: $globalSecondaryColor;
+    border-color: $globalSecondaryColor;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: lighten($globalSecondaryColor, 4%);
+        border-color: lighten($globalSecondaryColor, 4%);
+    }
+}
+
+/* /buttons */
+
+/* modules */
+.module {
+    &-title {
+        margin: 30px 0 40px;
+    }
+}
+/* /modules */

@@ -1,7 +1,7 @@
 <template>
     <div id="navbar">
         <nav class="container">
-            <div class="navbar-row row align-items-center">
+            <div class="navbar-row d-flex align-items-center">
                 <div class="logo">
                     <a href="/"><img src="../assets/logo.svg"></a>
                 </div>

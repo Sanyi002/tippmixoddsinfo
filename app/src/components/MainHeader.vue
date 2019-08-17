@@ -12,10 +12,10 @@
                             Ha szeretnél többet megtudni az oldal működéséről, esetleg elakadtál nézd meg a <a href="/help">súgót</a>!
                         </div>
                     </div>
-                    <div class="header-anchor">
-                        <a href="/">
+                    <div class="header-anchor col-md-12">
+                        <a href="#event-filter" @click.prevent="scrollTo('#event-filter')">
                             <span class="anchor-text">Ugrás az eseményekhez!</span>
-														<span class="anchor-icon"><i class="icon-tippmixoddsinfo-double-down"></i></span>
+                            <span class="anchor-icon"><i class="icon-tippmixoddsinfo-double-down"></i></span>
                         </a>
                     </div>
                 </div>
@@ -26,13 +26,18 @@
 
 <script>
 export default {
-  name: 'main-header'
+  name: 'main-header',
+   methods: {
+    scrollTo(selector) {
+      document.querySelector(selector).scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 header {
-    padding-top: 140px;
+    padding: 140px 0 90px;
 }
 
 .content-wrapper {

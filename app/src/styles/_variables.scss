@@ -9,15 +9,18 @@ $fontFamilyBase: 'Asap', sans-serif;
 
 /* colors */
 $globalBackground: #17223B;
-$globalFontColor: #fff;
+$globalFontColor:#fff;
 $globalColor: #76a21e;
+$globalSecondaryColor: #ff5959;
 $linkColor: $globalColor;
 $linkHoverColor: $globalColor;
+$filterBackground: #243354;
 /* /colors */
 
-/* layout variables */
+/* modules variables */
 $navbarHeight: 80px;
-/* /layout variables */
+$filterHeight: 80px;
+/* /modules variables */
 
 /* global variables */
 $globalBorderRadius: 5px;
