@@ -1,6 +1,7 @@
 <template>
     <div id="events-table">
         <div class="container">
+            <table-pagination></table-pagination>
             <table class="table">
                 <thead>
                     <tr>
@@ -34,9 +35,14 @@
 </template>
 
 <script>
+import TablePagination from '@/components/TablePagination.vue'
+
 export default {
     name: 'EventsTable',
-    props: ['data']
+    props: ['data'],
+    components: {
+        TablePagination
+    }
 }
 </script>
 
