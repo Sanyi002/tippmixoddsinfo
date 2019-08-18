@@ -14,23 +14,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="marketNumber">26089</td>
-                        <td>Alavés - Levante<br><small>08.18. 19:00</small></td>
-                        <td>Labdarúgás</td>
-                        <td>Spanyol bajnokság</td>
-                        <td>2,15<br><small>2,00</small></td>
-                        <td>3,15<br><small>3,00</small></td>
-                        <td>3,20<br><small>3,30</small></td>
-                    </tr>
-                    <tr>
-                        <td class="marketNumber">26089</td>
-                        <td>Alavés - Levante<br><small>08.18. 19:00</small></td>
-                        <td>Labdarúgás</td>
-                        <td>Spanyol bajnokság</td>
-                        <td>2,15<br><small>2,00</small></td>
-                        <td>3,15<br><small>3,00</small></td>
-                        <td>3,20<br><small>3,30</small></td>
+                    <tr v-for="(item, key) in data" :key="key">
+                        <td class="marketNumber">{{ item.marketNumber }}</td>
+                        <td>
+                            <b>{{ item.eventName }}</b>
+                            <br>
+                            <small>{{ item.eventDate }}</small>
+                        </td>
+                        <td>{{ item.sportName }}</td>
+                        <td>{{ item.leagueName }}</td>
+                        <td class="odds"><b>{{ item.changedHomeOdds }}</b><br><small>{{ item.homeOdds }}</small></td>
+                        <td class="odds"><b>{{ item.changedDrawOdds }}</b><br><small>{{ item.drawOdds }}</small></td>
+                        <td class="odds"><b>{{ item.changedAwayOdds }}</b><br><small>{{ item.awayOdds }}</small></td>
                     </tr>
                 </tbody>
             </table>
@@ -40,7 +35,8 @@
 
 <script>
 export default {
-    name: 'EventsTable'
+    name: 'EventsTable',
+    props: ['data']
 }
 </script>
 
@@ -50,7 +46,7 @@ export default {
 
     td, th {
         padding: 17px 15px;
-        text-align: center;
+        text-align: left;
         vertical-align: middle;
         border: 0;
     }
@@ -79,13 +75,17 @@ export default {
     }
 
     tbody {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
+
+        b {
+            font-weight: 600;
+        }
 
         td {
-            text-align: center;
-            vertical-align: middle;
             border-bottom: 1px solid rgba($white, 0.08);
             background: rgba($black, 0.2);
+            line-height: 1;
+            transition: all 0.2s ease-in-out;
 
             &:first-child {
                 padding: 17px 15px 17px 35px;
@@ -97,16 +97,37 @@ export default {
 
             small {
                 font-size: 1.4rem;
+                display: block;
+                padding-top: 5px;
             }
         }
 
-        tr:last-child td {
-            border-bottom: 0;
+        tr {
+            &:last-child td {
+                border-bottom: 0;
+            }
+
+            &:hover,
+            &:active,
+            &:focus {
+                td {
+                    background: rgba($black, 0.1);
+                }
+            }
         }
 
         .marketNumber {
             font-size: 2rem;
             letter-spacing: 3px;
+        }
+
+        .odds {
+            text-align: center;
+            font-size: 1.5rem;
+            
+            small {
+                font-size: 1.2rem;
+            }
         }
     }
     
