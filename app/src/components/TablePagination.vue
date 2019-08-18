@@ -1,21 +1,65 @@
 <template>
     <div id="table-pagination" class="pagination-wrapper">
         <span class="sort-info">
-            <b>10</b> / 20 Oldal
+            <b>{{ pageNumber }}</b> / {{ allPage }} Oldal
         </span>
         <ul class="pagination-list">
-            <li class="pagination-link active">1</li>
-            <li class="pagination-link">2</li>
-            <li class="pagination-link">3</li>
-            <li class="pagination-link">4</li>
-            <li class="pagination-link pagination-next"><i class="icon-tippmixoddsinfo-right-arrow-light"></i></li>
+            <li class="pagination-link pagination-prev" :class="{ 'disabled' : pageNumber <= 1 }" @click="prevPage()"><i class="icon-tippmixoddsinfo-left-arrow-light"></i></li>
+            <li class="pagination-link pagination-selector">
+                <div class="form-group">
+                    <select class="form-control" v-model="pageNumber">
+                        <option v-for="(item, key) in allPage" :key="key" :value="item">
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+            </li>
+            <li class="pagination-link pagination-next" @click="nextPage()"><i class="icon-tippmixoddsinfo-right-arrow-light"></i></li>
         </ul>
     </div>    
 </template>
 
 <script>
 export default {
-    name: 'table-pagination'
+    name: 'table-pagination',
+    data() {
+        return {
+            paginatedData: [],
+            pageNumber: 1,
+            perPage: 10
+        }
+    },
+    props: ['data'],
+    methods: {
+        nextPage: function() {
+            if((this.pageNumber * this.perPage) < this.data.length) {
+                this.pageNumber++;
+            }
+        },
+        prevPage: function() {
+            if(this.pageNumber > 1) {
+                this.pageNumber--
+            }
+        }
+    },
+    computed: {
+        sortedData: function()  {
+            return this.data.filter((row, index) => {
+                let start = (this.pageNumber-1) * this.perPage;
+                let end = this.pageNumber * this.perPage;
+                if(index >= start && index < end) return true;
+            })
+        },
+        allPage: function() {
+            let dataItemNumber = this.data.length;
+            return Math.ceil(dataItemNumber/this.perPage);
+        }
+    },
+    watch: {
+        sortedData(newValue) {
+            this.$emit('sorted', newValue);
+        }
+    }
 }
 </script>
 
@@ -58,12 +102,59 @@ export default {
             margin: 0;
         }
 
-        &:hover,
-        &:active,
-        &:focus,
-        &.active {
-            background: $globalLightColor;
-            color: $globalDarkColor;
+        &:not(.pagination-selector):not(.disabled) {
+            &:hover,
+            &:active,
+            &:focus {
+                background: $globalLightColor;
+                color: $globalDarkColor;
+            }
+        }
+
+        &.disabled {
+            opacity: 0.3;
+            cursor: auto;
+        }
+    }
+
+    &-selector {
+        border: 0;
+        width: $paginationWidth + 30px;
+
+        .form-group {
+            margin: 0;
+            width: 100%;
+            position: relative;
+
+            &:before {
+                content: '\0048';
+                font-family: 'tippmixoddsinfo-icons';
+                position: absolute;
+                color: $globalFontColor;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                font-size: 1rem;
+                line-height: 1;
+                z-index: 0;
+            }
+        }
+
+        .form-control {
+            appearance: none;
+            border: 1px solid $globalLightColor;
+            border-radius: $globalBorderRadius;
+            font-size: 1.6rem;
+            background: transparent;
+            text-align: center;
+            color: $globalFontColor;
+            padding: 0 15px;
+            width: 100%;
+            height: $paginationHeight;
+            cursor: pointer;
+            font-weight: 600;
+            z-index: 1;
+            position: relative;
         }
     }
 

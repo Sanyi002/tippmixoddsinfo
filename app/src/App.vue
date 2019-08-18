@@ -34,6 +34,10 @@
 .icon-tippmixoddsinfo-trophy:before{content:'\0046';}
 .icon-tippmixoddsinfo-up-arrow:before{content:'\0047';}
 .icon-tippmixoddsinfo-down-arrow-light:before{content:'\0048';}
+.icon-tippmixoddsinfo-left-arrow-light:before{
+  content:'\0048';
+  transform: rotate(90deg);
+}
 .icon-tippmixoddsinfo-right-arrow-light:before{
   content:'\0048';
   transform: rotate(-90deg);

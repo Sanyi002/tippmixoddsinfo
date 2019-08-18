@@ -1,7 +1,6 @@
 <template>
     <div id="events-table">
         <div class="container">
-            <table-pagination></table-pagination>
             <table class="table">
                 <thead>
                     <tr>
@@ -15,7 +14,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item, key) in data" :key="key">
+                    <tr v-for="(item, key) in sortedData" :key="key">
                         <td class="marketNumber">{{ item.marketNumber }}</td>
                         <td>
                             <b>{{ item.eventName }}</b>
@@ -30,6 +29,7 @@
                     </tr>
                 </tbody>
             </table>
+            <table-pagination v-bind:data="data" v-model="sortedData" @sorted="sortedData = $event"></table-pagination>
         </div>
     </div>
 </template>
@@ -40,6 +40,11 @@ import TablePagination from '@/components/TablePagination.vue'
 export default {
     name: 'EventsTable',
     props: ['data'],
+    data() {
+        return {
+            sortedData: []
+        }
+    },
     components: {
         TablePagination
     }
