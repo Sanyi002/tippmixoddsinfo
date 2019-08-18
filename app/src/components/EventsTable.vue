@@ -45,7 +45,7 @@ export default {
     color: $globalFontColor;
 
     td, th {
-        padding: 17px 15px;
+        padding: 17px 25px;
         text-align: left;
         vertical-align: middle;
         border: 0;

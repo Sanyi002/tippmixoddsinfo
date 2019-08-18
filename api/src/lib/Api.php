@@ -130,15 +130,16 @@ class Api {
     }
 
     public function getEvents($sportID = null, $selectedCountry = null, $selectedLeague = null,  $selectedDate = null) {
-        $sqlBase = "SELECT me.eventID, me.eventName, me.marketNumber, convert(me.eventDate, DATE) AS eventDate, sc.sportName,
+        $sqlBase = "SELECT me.eventID, me.eventName, me.marketNumber, DATE_FORMAT(me.eventDate, '%m.%d %H:%i') AS eventDate, sc.sportName,
         me.leagueName, me.homeOdds, me.drawOdds, me.awayOdds, co.homeOdds AS changedHomeOdds, co.drawOdds AS changedDrawOdds, co.awayOdds AS changedAwayOdds
         FROM mainevents me
         INNER JOIN sportcategories sc ON me.sportID = sc.sportID
         INNER JOIN (SELECT * FROM changedodds ch WHERE ch.ID IN (SELECT MAX(ID) FROM changedodds GROUP BY eventID)) co ON me.eventID = co.eventID ";
+        $sqlEnd = " AND me.eventDate >= CONVERT(NOW(), datetime);";
         try {
             if(isset($sportID) && isset($selectedCountry) && isset($selectedLeague) && isset($selectedDate)) {
                 $sql = $sqlBase . "WHERE me.sportID = :sportID AND me.countryName = :countryName
-                    AND me.leagueName = :leagueName AND convert(me.eventDate, DATE) LIKE :selectedDate;";
+                    AND me.leagueName = :leagueName AND convert(me.eventDate, DATE) LIKE :selectedDate" . $sqlEnd;
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindparam(':sportID', $sportID);
                 $stmt->bindparam(':countryName', $selectedCountry);
@@ -146,37 +147,38 @@ class Api {
                 $stmt->bindparam(':selectedDate', $selectedDate);
                 $stmt->execute();
             } elseif(isset($sportID) && isset($selectedCountry) && isset($selectedLeague)) {
-                $sql = $sqlBase . "WHERE me.sportID = :sportID AND me.countryName = :countryName AND me.leagueName = :leagueName;";
+                $sql = $sqlBase . "WHERE me.sportID = :sportID AND me.countryName = :countryName AND me.leagueName = :leagueName" . $sqlEnd;
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindparam(':sportID', $sportID);
                 $stmt->bindparam(':countryName', $selectedCountry);
                 $stmt->bindparam(':leagueName', $selectedLeague);
                 $stmt->execute();
             } elseif(isset($sportID) && isset($selectedCountry) && isset($selectedDate)) {
-                $sql = $sqlBase . "WHERE me.sportID = :sportID AND me.countryName = :countryName AND convert(me.eventDate, DATE) LIKE :selectedDate;";
+                $sql = $sqlBase . "WHERE me.sportID = :sportID AND me.countryName = :countryName AND convert(me.eventDate, DATE) LIKE :selectedDate" . $sqlEnd;
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindparam(':sportID', $sportID);
                 $stmt->bindparam(':countryName', $selectedCountry);
                 $stmt->bindparam(':selectedDate', $selectedDate);
                 $stmt->execute();
             } elseif(isset($sportID) && isset($selectedCountry)) {
-                $sql = $sqlBase . "WHERE me.sportID = :sportID AND me.countryName = :countryName";
+                $sql = $sqlBase . "WHERE me.sportID = :sportID AND me.countryName = :countryName" . $sqlEnd;
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindparam(':sportID', $sportID);
                 $stmt->bindparam(':countryName', $selectedCountry);
                 $stmt->execute();
             } elseif(isset($sportID) && isset($selectedDate)) {
-                $sql = $sqlBase . "WHERE me.sportID = :sportID AND convert(me.eventDate, DATE) LIKE :selectedDate;";
+                $sql = $sqlBase . "WHERE me.sportID = :sportID AND convert(me.eventDate, DATE) LIKE :selectedDate" . $sqlEnd;
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindparam(':sportID', $sportID);
                 $stmt->bindparam(':selectedDate', $selectedDate);
                 $stmt->execute();
             } elseif(isset($sportID)) {
-                $sql = $sqlBase . "WHERE me.sportID = :sportID;";
+                $sql = $sqlBase . "WHERE me.sportID = :sportID" . $sqlEnd;
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindparam(':sportID', $sportID);
                 $stmt->execute();
             } else {
+                $sqlBase = $sqlBase . "WHERE me.eventDate >= CONVERT(NOW(), datetime);";
                 $stmt = $this->db->query($sqlBase);
             }
             $stmt = $stmt->fetchAll(PDO::FETCH_ASSOC);
