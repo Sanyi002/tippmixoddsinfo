@@ -14,7 +14,7 @@
                     </select>
                 </div>
             </li>
-            <li class="pagination-link pagination-next" @click="nextPage()"><i class="icon-tippmixoddsinfo-right-arrow-light"></i></li>
+            <li class="pagination-link pagination-next" :class="{ 'disabled' : pageNumber >= allPage }" @click="nextPage()"><i class="icon-tippmixoddsinfo-right-arrow-light"></i></li>
         </ul>
     </div>    
 </template>

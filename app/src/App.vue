@@ -32,7 +32,7 @@
 .icon-tippmixoddsinfo-globe:before{content:'\0044';}
 .icon-tippmixoddsinfo-soccer-ball:before{content:'\0045';}
 .icon-tippmixoddsinfo-trophy:before{content:'\0046';}
-.icon-tippmixoddsinfo-up-arrow:before{content:'\0047';}
+.icon-tippmixoddsinfo-down-arrow:before{content:'\0047';}
 .icon-tippmixoddsinfo-down-arrow-light:before{content:'\0048';}
 .icon-tippmixoddsinfo-left-arrow-light:before{
   content:'\0048';

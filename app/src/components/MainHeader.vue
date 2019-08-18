@@ -67,11 +67,15 @@ header {
         &:active,
         &:focus {
             opacity: 1;
+
+            .anchor-text {
+                padding-bottom: 30px;
+            }
         }
 
         a {
-						text-decoration: none;
-						color: $globalFontColor;
+            text-decoration: none;
+            color: $globalFontColor;
         }
     }
 }
@@ -79,9 +83,11 @@ header {
 .anchor{
 	&-text {
 		color: $globalFontColor;
-    text-transform: uppercase;
-    font-size: 1.4rem;
-    letter-spacing: 0.44px;
+        text-transform: uppercase;
+        font-size: 1.4rem;
+        letter-spacing: 0.44px;
+        display: block;
+        transition: $transitionBase;
 	}
 	
 	&-icon {
