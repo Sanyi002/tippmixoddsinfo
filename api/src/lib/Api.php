@@ -130,7 +130,7 @@ class Api {
     }
 
     public function getEvents($sportID = null, $selectedCountry = null, $selectedLeague = null,  $selectedDate = null) {
-        $sqlBase = "SELECT me.eventID, me.eventName, me.marketNumber, DATE_FORMAT(me.eventDate, '%m.%d %H:%i') AS eventDate, sc.sportName,
+        $sqlBase = "SELECT me.eventID, me.eventName, LPAD(me.marketNumber, 5, '0') AS marketNumber, DATE_FORMAT(me.eventDate, '%m.%d %H:%i') AS eventDate, sc.sportName,
         me.leagueName, me.homeOdds, me.drawOdds, me.awayOdds, co.homeOdds AS changedHomeOdds, co.drawOdds AS changedDrawOdds, co.awayOdds AS changedAwayOdds
         FROM mainevents me
         INNER JOIN sportcategories sc ON me.sportID = sc.sportID
