@@ -59,10 +59,10 @@
                     </datepicker>
                 </div>
                 </div>
-                <button class="btn btn-secondary filter-submit" @click="filterEvents(selectedCategoryID, selectedDate, selectedCountry, selectedLeague)">
+                <a class="btn btn-secondary filter-submit" @click.prevent="filterEvents(selectedCategoryID, selectedDate, selectedCountry, selectedLeague)" href="/">
                     Szűrés
                     <i class="icon-tippmixoddsinfo-filter"></i>
-                </button>
+                </a>
             </div>
         </div>
         <span v-if="selectedDate">{{ selectedDate }}</span>
@@ -227,6 +227,7 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
+    margin: 0 0 70px;
 }
 
 .filter-group {
@@ -342,6 +343,11 @@ export default {
     align-items: center;
     margin-left: auto;
 
+    &.btn {
+        color: $globalFontColor;
+        text-decoration: none;
+    }
+    
     i {
         font-size: 1.8rem;
         line-height: 1;

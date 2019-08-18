@@ -8,6 +8,8 @@ $fontFamilyBase: 'Asap', sans-serif;
 /* /font family */
 
 /* colors */
+$white: #fff;
+$black: #000;
 $globalBackground: #17223B;
 $globalFontColor:#fff;
 $globalColor: #76a21e;
@@ -25,4 +27,5 @@ $filterHeight: 80px;
 /* global variables */
 $globalBorderRadius: 5px;
 $transitionBase: all 0.3s ease-in-out;
+$baseLetterSpacing: 0.48px;
 /* /global variables */
