@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item, key) in sortedData" :key="key">
+                    <tr v-for="(item, key) in data" :key="key">
                         <td class="marketNumber">{{ item.marketNumber }}</td>
                         <td>
                             <b>{{ item.eventName }}</b>

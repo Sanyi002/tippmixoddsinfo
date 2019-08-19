@@ -2,7 +2,7 @@
   <div class="home">
     <navbar></navbar>
     <main-header></main-header>
-    <event-filter head-title="Események szűrése"></event-filter>
+    <event-filter @filter="filtered" head-title="Események szűrése"></event-filter>
     <events-table v-bind:data="events"></events-table>
   </div>
 </template>
@@ -26,6 +26,11 @@ export default {
     MainHeader,
     EventFilter,
     EventsTable
+  },
+  methods: {
+    filtered: function(value) {
+		this.events = value;
+    }
   },
   mounted() {
     axios.get(this.$ApiHostname + '/events')

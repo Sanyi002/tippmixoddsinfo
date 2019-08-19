@@ -59,14 +59,12 @@
                     </datepicker>
                 </div>
                 </div>
-                <a class="btn btn-secondary filter-submit" @click.prevent="filterEvents(selectedCategoryID, selectedDate, selectedCountry, selectedLeague)" href="/">
+                <button class="btn btn-secondary filter-submit" v-on:click.prevent="filterEvents(selectedCategoryID, selectedDate, selectedCountry, selectedLeague)" >
                     Szűrés
                     <i class="icon-tippmixoddsinfo-filter"></i>
-                </a>
+                </button>
             </div>
         </div>
-        <span v-if="selectedDate">{{ selectedDate }}</span>
-        <span>{{ requestParams }}</span>
     </div>
 </template>
 
@@ -118,15 +116,19 @@ export default {
             let formattedDate = selectedDate ? '/' + selectedDate.getFullYear() + "-0" + (selectedDate.getMonth()+1) + "-" + selectedDate.getDate() : '/' + null;
             if(formattedDate != "/null" && !sportID) {
                 axios.get(this.$ApiHostname + 'events/date' + formattedDate)
-                .then(response => console.log(response.data));
+                .then(response => (this.filteredEvents = response.data));
             } else if(sportID) {
                 sportID = sportID ? '/' + sportID : null;
                 selectedCountry = selectedCountry ? '/' + selectedCountry : '/' + null;
                 selectedLeague = selectedLeague ? '/' + selectedLeague : '/' + null;
-                console.log(this.$ApiHostname + 'events' + sportID + selectedCountry + selectedLeague + formattedDate);
                 axios.get(this.$ApiHostname + 'events' + sportID + selectedCountry + selectedLeague + formattedDate)
-                .then(response => console.log(response.data)); 
+                .then(response => (this.filteredEvents = response.data));
             }
+        }
+    },
+    watch: {
+        filteredEvents: function() {
+            this.$emit('filter', this.filteredEvents);
         }
     }
 }
