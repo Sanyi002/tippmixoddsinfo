@@ -8,9 +8,30 @@
                         <th>Esemény, időpont</th>
                         <th>Kategória</th>
                         <th>Bajnokság</th>
-                        <th>Hazai</th>
-                        <th>Döntetlen</th>
-                        <th>Vendég</th>
+                        <th class="clickable" @click="sortByHomeOddsSwitch >= 1 ? sortByHomeOddsSwitch = -1 : sortByHomeOddsSwitch++;
+                            sortByDrawOddsSwitch = sortByAwayOddsSwitch = -1; sortByHomeOdds(sortByHomeOddsSwitch)">
+                            Hazai
+                            <span class="sorting-icon">
+                                <i v-if="sortByHomeOddsSwitch == 0" class="icon-tippmixoddsinfo-up-arrow"></i>
+                                <i v-if="sortByHomeOddsSwitch == 1" class="icon-tippmixoddsinfo-down-arrow"></i>
+                            </span>
+                        </th>
+                        <th class="clickable" @click="sortByDrawOddsSwitch >1 ? sortByDrawOddsSwitch = -1 : sortByDrawOddsSwitch++;
+                            sortByHomeOddsSwitch = sortByAwayOddsSwitch = -1; sortByDrawOdds(sortByDrawOddsSwitch)">
+                            Döntetlen
+                            <span class="sorting-icon">
+                                <i v-if="sortByDrawOddsSwitch == 0" class="icon-tippmixoddsinfo-up-arrow"></i>
+                                <i v-if="sortByDrawOddsSwitch == 1" class="icon-tippmixoddsinfo-down-arrow"></i>
+                            </span>
+                        </th>
+                        <th class="clickable" @click="sortByAwayOddsSwitch >1 ? sortByAwayOddsSwitch = -1 : sortByAwayOddsSwitch++;
+                            sortByHomeOddsSwitch = sortByDrawOddsSwitch = -1; sortByAwayOdds(sortByAwayOddsSwitch)">
+                            Vendég
+                            <span class="sorting-icon">
+                                <i v-if="sortByAwayOddsSwitch == 0" class="icon-tippmixoddsinfo-up-arrow"></i>
+                                <i v-if="sortByAwayOddsSwitch == 1" class="icon-tippmixoddsinfo-down-arrow"></i>
+                            </span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +68,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table-pagination v-bind:data="data" v-model="sortedData" @sorted="sortedData = $event"></table-pagination>
+            <table-pagination v-bind:data="data" @sorted="sortedData = $event"></table-pagination>
         </div>
     </div>
 </template>
@@ -60,7 +81,10 @@ export default {
     props: ['data'],
     data() {
         return {
-            sortedData: []
+            sortedData: [],
+            sortByHomeOddsSwitch: -1,
+            sortByDrawOddsSwitch: -1,
+            sortByAwayOddsSwitch: -1
         }
     },
     components: {
@@ -73,8 +97,47 @@ export default {
             } else {
                 return 0;
             }
+        },
+        sortByHomeOdds: function(cond) {
+			let _this = this;
+
+            if(cond == 0) {
+                this.data.sort(function(a, b) {
+                    return (_this.oddsDiff(a.homeOdds, a.changedHomeOdds)) - (_this.oddsDiff(b.homeOdds, b.changedHomeOdds));
+                });
+            } else if(cond == 1) {
+                this.data.sort(function(a, b) {
+                    return (_this.oddsDiff(b.homeOdds, b.changedHomeOdds)) - (_this.oddsDiff(a.homeOdds, a.changedHomeOdds));
+                });
+            }
+        },
+        sortByDrawOdds: function(cond) {
+            let _this = this;
+
+            if(cond == 0) {
+                this.data.sort(function(a, b) {
+                    return (_this.oddsDiff(a.drawOdds, a.changedDrawOdds)) - (_this.oddsDiff(b.drawOdds, b.changedDrawOdds));
+                });
+            } else if(cond == 1) {
+                this.data.sort(function(a, b) {
+                    return (_this.oddsDiff(b.drawOdds, b.changedDrawOdds)) - (_this.oddsDiff(a.drawOdds, a.changedDrawOdds));
+                });
+            }
+        },
+        sortByAwayOdds: function(cond) {
+            let _this = this;
+
+            if(cond == 0) {
+                this.data.sort(function(a, b) {
+                    return (_this.oddsDiff(a.awayOdds, a.changedAwayOdds)) - (_this.oddsDiff(b.awayOdds, b.changedAwayOdds));
+                });
+            } else if(cond == 1) {
+                this.data.sort(function(a, b) {
+                    return (_this.oddsDiff(b.awayOdds, b.changedAwayOdds)) - (_this.oddsDiff(a.awayOdds, a.changedAwayOdds));
+                });
+            }
         }
-    }
+	}
 }
 </script>
 
@@ -238,5 +301,16 @@ table .odds {
     }
 }
 
+.clickable {
+    cursor: pointer;
+    
+    .table thead & {
+        padding: 17px 20px;
+    }
+}
+
+.sorting-icon {
+    font-size: 0.9rem;
+}
 
 </style>

@@ -69,7 +69,7 @@ header {
             opacity: 1;
 
             .anchor-text {
-                padding-bottom: 30px;
+                top: -30px;
             }
         }
 
@@ -88,6 +88,8 @@ header {
         letter-spacing: 0.44px;
         display: block;
         transition: $transitionBase;
+        top: 0;
+        position: relative;
 	}
 	
 	&-icon {
