@@ -9,8 +9,6 @@ body {
     background: $globalBackground;
     color: $globalFontColor;
 
-    padding-bottom: 350px;
-
     @media screen and (min-width: $screen-lg-min) {
         font-size: 1.6rem;
     }

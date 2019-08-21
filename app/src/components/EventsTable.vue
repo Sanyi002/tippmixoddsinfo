@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item, key) in data" :key="key">
+                    <tr v-for="(item, key) in sortedData" :key="key">
                         <td class="marketNumber">{{ item.marketNumber }}</td>
                         <td>
                             <b>{{ item.eventName }}</b>
@@ -68,7 +68,7 @@
                     </tr>
                 </tbody>
             </table>
-            <table-pagination v-bind:data="data" @sorted="sortedData = $event"></table-pagination>
+            <table-pagination :data="data" @sorted="sortedData = $event"></table-pagination>
         </div>
     </div>
 </template>
