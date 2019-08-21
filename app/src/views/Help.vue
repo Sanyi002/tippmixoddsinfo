@@ -1,6 +1,5 @@
 <template>
     <div id="help-page">
-        <navbar></navbar>
         <div class="container page-wrapper">
             <h1 class="page-title">
                 Súgó
@@ -21,20 +20,13 @@
                 </div>
             </div>
         </div>
-        <main-footer></main-footer>
     </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
-import MainFooter from '@/components/MainFooter.vue'
 
 export default {
-    name: 'contact',
-    components: {
-        Navbar,
-        MainFooter
-    }
+    name: 'contact'
 }
 </script>
 

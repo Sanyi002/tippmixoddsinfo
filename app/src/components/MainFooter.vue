@@ -31,9 +31,10 @@ export default {
 <style lang="scss" scoped>
 footer {
     background: rgba($black, 0.2);
-    margin-top: 90px;
     display: inline-block;
     width: 100%;
+    height: $footerHeight;
+    margin-top: auto;
 }
 
 .footer {

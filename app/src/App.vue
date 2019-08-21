@@ -1,11 +1,34 @@
 <template>
-  <div id="app">
-    <router-view/>
+  <div class="page-body">
+    <navbar></navbar>
+    <div id="app">
+      <router-view/>
+    </div>
+    <main-footer></main-footer>
   </div>
+  
 </template>
+
+<script>
+import Navbar from '@/components/Navbar.vue'
+import MainFooter from '@/components/MainFooter.vue'
+
+export default {
+  components: {
+    Navbar,
+    MainFooter
+  }
+}
+</script>
 
 <style lang="scss">
 @import "./styles/_globals.scss";
+
+.page-body {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
 
 @font-face {
     font-family: 'tippmixoddsinfo-icons';
