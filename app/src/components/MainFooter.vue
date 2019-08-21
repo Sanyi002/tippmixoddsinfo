@@ -32,6 +32,8 @@ export default {
 footer {
     background: rgba($black, 0.2);
     margin-top: 90px;
+    display: inline-block;
+    width: 100%;
 }
 
 .footer {

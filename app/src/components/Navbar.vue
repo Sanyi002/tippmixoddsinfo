@@ -6,9 +6,9 @@
                     <a href="/"><img src="../assets/logo.svg"></a>
                 </div>
                 <ul class="navbar-list">
-                    <li class="navbar-item active"><a href="">Főoldal</a></li>
-                    <li class="navbar-item"><a href="">Kapcsolat</a></li>
-                    <li class="navbar-item"><a href="">Súgó</a></li>
+                    <router-link class="navbar-item" tag="li" active-class="active" to="/" exact>Főoldal</router-link>
+                    <router-link class="navbar-item" tag="li" active-class="active" to="/contact">Kapcsolat</router-link>
+                    <router-link class="navbar-item" tag="li" active-class="active" to="/help">Súgó</router-link>
                 </ul>
             </div>
         </nav>
@@ -48,6 +48,8 @@ nav {
         letter-spacing: 0.48px;
         line-height: $navbarHeight;
         position: relative;
+        cursor: pointer;
+        transition: $transitionBase;
 
         &:before {
             content: '';
@@ -60,28 +62,21 @@ nav {
             width: calc(100% - 50px);
             height: 5px;
             opacity: 0;
+            transition: $transitionBase;
         }
 
-        a,
-        a:visited {
-            color: $globalFontColor;
-            text-decoration: none;
-        }
-
-        a:hover,
-        a:active,
-        a:focus {
+        &:hover,
+        &:active,
+        &:focus {
             color: $linkColor;
         }
 
         &.active {
+            color: $linkColor;
+            font-weight: 600;
+
             &:before {
                 opacity: 1;
-            }
-
-            a {
-                color: $linkColor;
-                font-weight: 600;
             }
         }
     }
