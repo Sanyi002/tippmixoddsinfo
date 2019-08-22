@@ -43,6 +43,7 @@ footer {
         display: flex;
         justify-content: space-between;
         padding: 15px 0;
+        position: relative;
 
         a,
         a:visited {
@@ -83,5 +84,12 @@ footer {
             padding: 0 5px;
         }
     }
+}
+
+.personal-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 </style>

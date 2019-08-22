@@ -34,7 +34,8 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <load-status v-if="!dataPaginated"></load-status>
+                <tbody v-if="dataPaginated">
                     <tr v-for="(item, key) in sortedData" :key="key">
                         <td class="marketNumber">{{ item.marketNumber }}</td>
                         <td>
@@ -68,13 +69,14 @@
                     </tr>
                 </tbody>
             </table>
-            <table-pagination :data="data" @sorted="sortedData = $event"></table-pagination>
+            <table-pagination :data="data" @sorted="sortedData = $event; dataPaginated = true"></table-pagination>
         </div>
     </div>
 </template>
 
 <script>
 import TablePagination from '@/components/TablePagination.vue'
+import LoadStatus from '@/components/LoadStatus.vue'
 
 export default {
     name: 'EventsTable',
@@ -84,11 +86,13 @@ export default {
             sortedData: [],
             sortByHomeOddsSwitch: -1,
             sortByDrawOddsSwitch: -1,
-            sortByAwayOddsSwitch: -1
+            sortByAwayOddsSwitch: -1,
+            dataPaginated: false
         }
     },
     components: {
-        TablePagination
+        TablePagination,
+        LoadStatus
     },
     methods: {
         oddsDiff: function(oddsOrigin, oddsChanged) {
@@ -137,7 +141,7 @@ export default {
                 });
             }
         }
-	}
+    }
 }
 </script>
 
@@ -156,6 +160,7 @@ export default {
 
 .table {
     color: $globalFontColor;
+    position: relative;
 
     td, th {
         padding: 17px 25px;
@@ -305,7 +310,9 @@ table .odds {
     cursor: pointer;
     
     .table thead & {
-        padding: 17px 20px;
+        padding: 17px 10px;
+        text-align: center;
+        white-space: nowrap;
     }
 }
 

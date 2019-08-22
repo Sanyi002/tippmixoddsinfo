@@ -1,7 +1,7 @@
 <template>
   <div class="page-body">
     <navbar></navbar>
-    <div id="app">
+    <div id="tippmixoddsinfo-app">
       <router-view/>
     </div>
     <main-footer></main-footer>
@@ -58,6 +58,7 @@ export default {
 .icon-tippmixoddsinfo-down-arrow:before{content:'\0047';}
 .icon-tippmixoddsinfo-down-arrow-light:before{content:'\0048';}
 .icon-tippmixoddsinfo-instagram:before{content:'\0049';}
+.icon-tippmixoddsinfo-spinner:before{content:'\004a';}
 .icon-tippmixoddsinfo-up-arrow:before{
   content:'\0047';
   transform: rotate(180deg);

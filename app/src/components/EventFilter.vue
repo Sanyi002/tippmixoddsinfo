@@ -114,6 +114,7 @@ export default {
         },
         filterEvents: function(sportID, selectedDate, selectedCountry, selectedLeague) {
             let formattedDate = selectedDate ? '/' + selectedDate.getFullYear() + "-0" + (selectedDate.getMonth()+1) + "-" + selectedDate.getDate() : '/' + null;
+            this.$emit('filterTriggered', false);
             if(formattedDate != "/null" && !sportID) {
                 axios.get(this.$ApiHostname + 'events/date' + formattedDate)
                 .then(response => (this.filteredEvents = response.data));
@@ -121,7 +122,7 @@ export default {
                 sportID = sportID ? '/' + sportID : null;
                 selectedCountry = selectedCountry ? '/' + selectedCountry : '/' + null;
                 selectedLeague = selectedLeague ? '/' + selectedLeague : '/' + null;
-                axios.get(this.$ApiHostname + 'events' + sportID + selectedCountry + selectedLeague + formattedDate)
+                axios.get(this.$ApiHostname + 'events' + sportID + encodeURI(selectedCountry) + encodeURI(selectedLeague) + formattedDate)
                 .then(response => (this.filteredEvents = response.data));
             }
         }

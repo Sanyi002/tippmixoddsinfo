@@ -79,7 +79,7 @@ $app->get('/events[/{sportID}[/{countryName}[/{leagueName}[/{date}]]]]', functio
     $args['countryName'] = $args['countryName'] == 'null' ? null : $args['countryName'];
     $args['leagueName'] = $args['leagueName'] == 'null' ? null : $args['leagueName'];
     $args['date'] = $args['date'] == 'null' ? null : $args['date'];
-    $results = $api->getEvents($args['sportID'], $args['countryName'], $args['leagueName'], $args['date']);
+    $results = $api->getEvents($args['sportID'], urldecode($args['countryName']), urldecode($args['leagueName']), $args['date']);
     $results = json_encode($results, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     $response->withStatus(200)
             ->getBody()
